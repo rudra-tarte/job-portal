@@ -10,15 +10,21 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from './auth';
 import Navbar from './navbar';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { addUser } from '../redux/userSlice';
 
 
 
 export default function Login() {
 
 
-const [user, setUser] = useState("");
+const [username, setUsername] = useState("");
 const [pwd, setPwd] = useState("");
 const [errMsg, setErrMsg] = useState("");
+
+
+const user = useSelector(state=>state.users);
+const dispatch = useDispatch();
 
 
 
@@ -27,7 +33,7 @@ const auth = useAuth();
 const navigate = useNavigate()
 
 let data = JSON.stringify({
-  "email": user,
+  "email": username,
   "password": pwd
 });
 
@@ -44,16 +50,18 @@ let config = {
 
 const handleLogin = async (event) => {
   event.preventDefault();
+  //console.log(pwd);
   try{
     const response = await axios.request(config);
     console.log(JSON.stringify(response.data.data));
     console.log(response.data.data.type);
-    console.log("Email "+user)
-    setUser(response.data.data.type);
-    console.log("emp "+user)
+    console.log("Email "+username)
+    ////setUser(response.data.data.type);
+    dispatch(addUser(response.data.data.type))
+    console.log("emp "+username)
     //auth.login(user);
     auth.login(response.data.data.type);
-    //navigate("/home")
+    navigate("/home")
   } catch(error){
     console.log(error)
     console.log(error.response.status);
@@ -69,8 +77,8 @@ const handleLogin = async (event) => {
 
    return (
     <>
-     { (auth.user!=null)  ? 
-
+      {/* { (auth.user!=null)  ?  */}
+      { (user!="")  ?
       <section>
         <Navbar></Navbar>
       <Grid container component="main" sx={{ height: '100vh' }}>
@@ -101,7 +109,7 @@ const handleLogin = async (event) => {
                 <Typography variant="h5" style={{ textAlign: 'left', fontWeight: 'bold' }} >
                     You are logged in
                 </Typography>
-                <h1>{user}</h1>
+                <h1>{username}</h1>
             </Box>
           </Box>
         </Grid>
@@ -153,7 +161,7 @@ const handleLogin = async (event) => {
             name="email"
             autoComplete="email"
             autoFocus
-            onChange={(e) => setUser(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <br></br>
             <h4 style={{ marginBottom: 2, paddingBottom: 2 }} >Password</h4>

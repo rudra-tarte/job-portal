@@ -20,16 +20,14 @@ function App() {
       
       <Routes>
       <Route path='/' element={<Login/>}  ></Route>
-      <Route path='/home' element={ <RequireAuth><Home/></RequireAuth> }></Route>
-      <Route path='/home' element={ <Home/> }></Route>
-      <Route path='/about' element={<RequireAuth><About/></RequireAuth>}></Route>
-      {/* <Route path='/listing' element={<RequireAuth><Listing/></RequireAuth>}></Route> */}
-      <Route path='/listing' element={<Listing/>}></Route>
-      <Route path='/contact' element={<RequireAuth><Contact/></RequireAuth>}></Route>
-      <Route path='/showcase' element={<RequireAuth><Companies/></RequireAuth>}></Route>
-      {/* <Route path='/employee' element={<RequireAuth><Employee/></RequireAuth>}></Route> */}
-      <Route path='/employee' element={<Employee/>}></Route>
-      <Route path='/postjob' element={<PostJobs/>}></Route>
+      <Route path='/home' element={ <RequireAuth role={["admin","employee"]} ><Home/></RequireAuth> }></Route>
+      {/* <Route path='/home' element={ <Home/> }></Route> */}
+      <Route path='/about' element={<RequireAuth role={["admin","employee"]} ><About/></RequireAuth>}></Route>
+      <Route path='/listing' element={<RequireAuth role={["employee"]} ><Listing/></RequireAuth>}></Route>
+      <Route path='/contact' element={<RequireAuth role={["admin","employee"]} ><Contact/></RequireAuth>}></Route>
+      <Route path='/showcase' element={<RequireAuth role={["admin","employee"]} ><Companies/></RequireAuth>}></Route>
+      <Route path='/employee' element={<RequireAuth role={["admin"]} ><Employee/></RequireAuth>}></Route>
+      <Route path='/postjob' element={<RequireAuth role={["admin"]} ><PostJobs/></RequireAuth>}></Route>
     </Routes>
     </AuthProvider>
   );

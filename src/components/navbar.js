@@ -16,9 +16,7 @@ import { useAuth } from './auth';
 const settings = ['Logout'];
 
 function ResponsiveAppBar() {
-  {
-    
-  }
+  
   const { logout, user } = useAuth();
   debugger  
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -64,16 +62,22 @@ function ResponsiveAppBar() {
 
               {/* <h1>{user}</h1> */}
 
-              {user=='admin' ? <Button
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                <Link to="/employee" style={{color:"white",fontWeight:"bold",textDecoration:"none"}}>Employee</Link>
-              </Button> : <></>}
-
               {user=='employee' ? <Button
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 <Link to="/listing" style={{color:"white",fontWeight:"bold",textDecoration:"none"}}>Job Listing</Link>
+              </Button> : <></>}
+
+              {user=='admin' ? <Button
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                <Link to="/employee" style={{color:"white",fontWeight:"bold",textDecoration:"none"}}>Employees</Link>
+              </Button> : <></>}
+
+              {user=='admin' ? <Button
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                <Link to="/postjob" style={{color:"white",fontWeight:"bold",textDecoration:"none"}}>Post Job</Link>
               </Button> : <></>}
          
         

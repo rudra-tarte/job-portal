@@ -18,7 +18,7 @@ export default function Listing() {
     }
   };
 
-  async function getEmployee()
+  async function getJob()
   {
     try{
       const response = await axios.request(config);
@@ -37,8 +37,7 @@ export default function Listing() {
 
   useEffect( () => {
     
-       console.log("hgfehg");
-       getEmployee();
+       getJob();
     
   },[]);
 
@@ -98,10 +97,10 @@ export default function Listing() {
               {
                 selectedJob?.title ?
                   <Paper>
-                    <h1>{selectedJob.title}</h1>
-                    <p>{selectedJob.updated_at}</p>
+                    <h1 >{selectedJob.title}</h1>
+                    <p>{selectedJob.company}</p>
                     <p>{selectedJob.description}</p>
-                    <p>{selectedJob.lastUpdated}</p>
+                    <p>{selectedJob.salary}</p>
                     <Button href={selectedJob.applyLink}>Apply</Button>
                   </Paper> :
                   <Paper>

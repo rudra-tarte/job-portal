@@ -13,30 +13,30 @@ import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
+import {useDispatch, useSelector} from 'react-redux'; 
+import { addUser } from '../redux/userSlice';
+import { useEffect } from 'react';
 
 
 export default function Home() {
 
-  const [expanded, setExpanded] = React.useState(false);
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.users);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  useEffect( () => {
+    
+    //dispatch(addUser("rudra"));
+ 
+},[]);
+
+
+  
 
   return (
+   
     <div>
       <Navbar></Navbar>
+      {/* <h1>{user}</h1> */}
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding:'20px'}}>
       <Card sx={{ maxWidth: 745 }}>
       <CardHeader
